@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/syleresume.css">
+</head>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg,#4f94e2, #a573c5,#eb77a9);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 650px;
+  background: rgba(255, 255, 255, 0.338);
+  padding: 35px 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+h1 {
+  font-size: 32px;
+font-weight: bolder;
+  color: #3544b7;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+.dashboard-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #22c1c3, #7c3aed);
+  border: none;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 16px 35px rgba(124, 58, 237, 0.25);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  opacity: 0.95;
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  border: none;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 16px 35px rgba(239, 68, 68, 0.25);
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  transform: translateY(-3px);
+  opacity: 0.95;
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 25px 20px;
+  }
+
+  .btn-primary, .logout-btn {
+    width: 100%;
+  }
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Dashboard</h1>
+        
+        <div class="dashboard-buttons text-center">
+            <a href="/myresume.html">
+            <button class="btn btn-primary mr-3">Create Resume</button>
+            </a>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+        if (!loggedInUser) {
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('userGreeting').textContent = `Welcome, ${loggedInUser.fullName}!`;
+            loadResumes();
+        }
+
+        function createResume() {
+            window.location.href = 'myresume.html';
+        }
+
+        function logout() {
+            sessionStorage.removeItem('loggedInUser');
+            window.location.href = 'login.html';
+        }
+
+        function loadResumes() {
+            const resumes = JSON.parse(localStorage.getItem(`resumes_${loggedInUser.email}`)) || [];
+            const resumesList = document.getElementById('resumes-list');
+            if (resumes.length === 0) {
+                resumesList.innerHTML = '<p>No resumes created yet. Click "Create Resume" to get started!</p>';
+                return;
+            }
+            resumesList.innerHTML = resumes.map((resume, index) => `
+                <div class="resume-item mb-4 p-3 border rounded" style="background: rgba(255,255,255,0.9);">
+                    <h4>${resume.name}'s Resume</h4>
+                    <p><strong>Created:</strong> ${new Date(resume.timestamp).toLocaleString()}</p>
+                    <button class="btn btn-secondary btn-sm mr-2" onclick="viewResume(${index})">View Full Resume</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteResume(${index})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function viewResume(index) {
+            const resumes = JSON.parse(localStorage.getItem(`resumes_${loggedInUser.email}`)) || [];
+            const resume = resumes[index];
+            const fullResume = `
+                <h2>${resume.name}</h2>
+                <p><strong>Email:</strong> ${resume.email}</p>
+                <p><strong>Phone:</strong> ${resume.phone}</p>
+                ${resume.profileSummary ? `<h3>Profile Summary</h3><p>${resume.profileSummary.replace(/\n/g, '<br>')}</p>` : ''}
+                ${resume.education ? `<h3>Education</h3><p>${resume.education.replace(/\n/g, '<br>')}</p>` : ''}
+                <h3>Experience</h3><p>${resume.experience.replace(/\n/g, '<br>')}</p>
+                ${resume.skills ? `<h3>Skills</h3><p>${resume.skills.replace(/\n/g, '<br>')}</p>` : ''}
+                ${resume.languages ? `<h3>Languages</h3><p>${resume.languages.replace(/\n/g, '<br>')}</p>` : ''}
+            `;
+            alert(`Full Resume:\n\n${fullResume.replace(/<[^>]*>/g, '')}`); // Simple alert; could be a modal
+        }
+
+        function deleteResume(index) {
+            if (confirm('Are you sure you want to delete this resume?')) {
+                const resumes = JSON.parse(localStorage.getItem(`resumes_${loggedInUser.email}`)) || [];
+                resumes.splice(index, 1);
+                localStorage.setItem(`resumes_${loggedInUser.email}`, JSON.stringify(resumes));
+                loadResumes();
+            }
+        }
+
+
+function viewResume(index) { 
+    const resumes = JSON.parse(localStorage.getItem(`resumes_${loggedInUser.email}`)) || [];
+    const resume = resumes[index];
+    const newWindow = window.open('', '_blank');
+    newWindow.document.write(resume.html);
+    newWindow.document.close();
+}
+
+    </script>
+</body>
+</html>

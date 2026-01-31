@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+             background: linear-gradient(135deg,#94BBE9, #a281b7,#EEAECA);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            /* background-color: #f4f4f4; */
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+            color:  #3b4cca;
+
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color:  #3b4cca;
+
+        }
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .success {
+            color: green;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login:</h2>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+
+            <div id="errorMessage" class="error" style="display: none;"></div>
+
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Clear previous messages
+            document.getElementById('errorMessage').style.display = 'none';
+
+            // Validation: Check for empty fields
+            if (!email || !password) {
+                showError('Email and password are required.');
+                return;
+            }
+
+            // Load existing users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Find user by email
+            const user = users.find(u => u.email === email);
+
+            if (!user) {
+                showError('Invalid email or password.');
+                return;
+            }
+
+            // Check password
+            if (user.password !== password) {
+                showError('Invalid email or password.');
+                return;
+            }
+
+            // Success: Redirect to resume generator
+            // Store logged-in user in sessionStorage for resume generator use
+            sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+            window.location.href = 'dashboard.html';
+
+            
+        });
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #e3f2ff, #f3e8ff);
+  color: #1f2937;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px 35px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #3b4cca;
+  letter-spacing: 1px;
+}
+
+h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #5b21b6;
+}
+
+.form-control {
+  border-radius: 14px;
+  border: 1px solid #d6d6ff;
+  background: #fbfbff;
+  padding: 12px 14px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
+  background: #ffffff;
+}
+
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, #22c1c3, #7c3aed);
+  border: none;
+  border-radius: 16px;
+  padding: 12px 0;
+  font-weight: 700;
+  box-shadow: 0 14px 28px rgba(124, 58, 237, 0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.btn-info {
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  border: none;
+  border-radius: 14px;
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  border: none;
+  border-radius: 14px;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  border: none;
+  border-radius: 14px;
+}
+
+
+#resume-output {
+  margin-top: 25px;
+  padding: 20px 25px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f7f7ff, #f0fff6);
+  border: 1px solid #d1d5db;
+}
+
+#resume-output h2 {
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#resume-output p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+#userGreeting {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.logout-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Resume Builder</h1>
+        <form id="resume-form">
+            <h2>Personal Information</h2>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="text" class="form-control" id="phone" required>
+            </div>
+
+            <h2>Profile Summary</h2>
+            <div class="form-group">
+                <textarea class="form-control" id="profileSummary" rows="4" placeholder="Brief summary about yourself..."></textarea>
+            </div>
+
+            <h2>Education</h2>
+            <div class="form-group">
+                <!-- <label for="education">Education:</label> -->
+                <textarea class="form-control" id="education" rows="4" placeholder="List your education details..."></textarea>
+            </div>
+
+            <h2>Experience</h2>
+            <div class="form-group">
+                <!-- <label for="experience">Experience:</label> -->
+                <textarea class="form-control" id="experience" rows="4" required placeholder="Describe your work experience..."></textarea>
+            </div>
+
+            <h2>Skills</h2>
+            <div class="form-group">
+                <!-- <label for="skills">Skills:</label> -->
+                <textarea class="form-control" id="skills" rows="3" placeholder="List your skills (e.g., JavaScript, Communication)..."></textarea>
+            </div>
+
+            <h2>Languages</h2>
+            <div class="form-group">
+                <!-- <label for="languages">Languages:</label> -->
+                <textarea class="form-control" id="languages" rows="3" placeholder="List languages you speak (e.g., English, Spanish)..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Generate Resume</button>
+        </form>
+        <div class="mt-3">
+            <button id="viewResumeBtn" class="btn btn-info">View Resume</button>
+            <button id="editResumeBtn" class="btn btn-warning" onclick="editResume()" >Edit Resume</button>
+            <button id="downloadResumeBtn" class="btn btn-success" style="display: none;">Download Resume as myresume.html</button>
+        </div>
+        
+        <div id="resume-output" class="mt-5"></div> 
+        
+        <div class="modal fade" id="resumeModal" tabindex="-1" role="dialog" aria-labelledby="resumeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="resumeModalLabel">Your Resume</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modalResumeContent">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="logout-btn mt-3" onclick="logout()">Logout</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script src="/myresume.js"></script>
+</body>
+</html>
