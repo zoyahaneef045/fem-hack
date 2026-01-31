@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,100 +9,211 @@
     <link rel="stylesheet" href="/syleresume.css">
 </head>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg,#4f94e2, #a573c5,#eb77a9);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #4f94e2, #a573c5, #eb77a9);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.container {
-  width: 90%;
-  max-width: 650px;
-  background: rgba(255, 255, 255, 0.338);
-  padding: 35px 40px;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-  text-align: center;
-}
+    .container {
+        width: 90%;
+        max-width: 650px;
+        background: rgba(255, 255, 255, 0.338);
+        padding: 35px 40px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        text-align: center;
+    }
 
-h1 {
-  font-size: 32px;
-font-weight: bolder;
-  color: #3544b7;
-  margin-bottom: 25px;
-  letter-spacing: 1px;
-}
-.dashboard-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
+    h1 {
+        font-size: 32px;
+        font-weight: bolder;
+        color: #3544b7;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
 
-.btn-primary {
-  background: linear-gradient(135deg, #22c1c3, #7c3aed);
-  border: none;
-  color: white;
-  padding: 14px 22px;
-  border-radius: 16px;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 16px 35px rgba(124, 58, 237, 0.25);
-  transition: all 0.3s ease;
-}
+    .dashboard-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
 
-.btn-primary:hover {
-  transform: translateY(-3px);
-  opacity: 0.95;
-}
+    .btn-primary {
+        background: linear-gradient(135deg, #22c1c3, #7c3aed);
+        border: none;
+        color: white;
+        padding: 14px 22px;
+        border-radius: 16px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 16px 35px rgba(124, 58, 237, 0.25);
+        transition: all 0.3s ease;
+    }
 
-.logout-btn {
-  background: linear-gradient(135deg, #ef4444, #f59e0b);
-  border: none;
-  color: white;
-  padding: 14px 22px;
-  border-radius: 16px;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 16px 35px rgba(239, 68, 68, 0.25);
-  transition: all 0.3s ease;
-}
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        opacity: 0.95;
+    }
 
-.logout-btn:hover {
-  transform: translateY(-3px);
-  opacity: 0.95;
-}
+    .logout-btn {
+        background: linear-gradient(135deg, #ef4444, #f59e0b);
+        border: none;
+        color: white;
+        padding: 14px 22px;
+        border-radius: 16px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 16px 35px rgba(239, 68, 68, 0.25);
+        transition: all 0.3s ease;
+    }
 
-@media (max-width: 500px) {
-  .container {
-    padding: 25px 20px;
-  }
+    .logout-btn:hover {
+        transform: translateY(-3px);
+        opacity: 0.95;
+    }
 
-  .btn-primary, .logout-btn {
-    width: 100%;
-  }
-}
+    @media (max-width: 500px) {
+        .container {
+            padding: 25px 20px;
+        }
 
+        .btn-primary,
+        .logout-btn {
+            width: 100%;
+        }
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        padding-top: 70px;
+        background: linear-gradient(135deg, #4f94e2, #a573c5, #eb77a9);
+
+    }
+
+    .navbar {
+        position: fixed;
+        top: 0;
+        /* left: 0; */
+        width: 100%;
+        background: rgb(197, 145, 197);
+        display: flex;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        z-index: 1000;
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        padding-right: 400px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #4f46e5;
+    }
+
+    .nav-links {
+        padding-top: 12px;
+        list-style: none;
+        display: flex;
+        gap: 30px;
+    }
+
+    .nav-links li a {
+        text-decoration: none;
+        color: #111827;
+        font-weight: 500;
+    }
+
+    .nav-links li a:hover {
+        color: #4f46e5;
+    }
+
+    .menu-toggle {
+        display: none;
+        font-size: 26px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: block;
+        }
+
+        .nav-links {
+            position: absolute;
+            top: 65px;
+            right: 0;
+            width: 100%;
+            background: white;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            display: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links.show {
+            display: flex;
+        }
+    }
 </style>
+
 <body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <!-- Logo -->
+            <div class="logo">ResumeBuilder</div>
+
+            <!-- Hamburger (mobile) -->
+            <div class="menu-toggle" id="menuToggle">☰</div>
+
+            <!-- Links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="myresume.html">Create Resume</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+
     <div class="container">
         <h1 class="text-center mt-5">Dashboard</h1>
-        
+
         <div class="dashboard-buttons text-center">
             <a href="/myresume.html">
-            <button class="btn btn-primary mr-3">Create Resume</button>
+                <button class="btn btn-primary mr-3">Create Resume</button>
             </a>
             <button class="logout-btn" onclick="logout()">Logout</button>
         </div>
@@ -110,7 +222,7 @@ font-weight: bolder;
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+
     <script>
         const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
         if (!loggedInUser) {
@@ -172,14 +284,30 @@ font-weight: bolder;
         }
 
 
-function viewResume(index) { 
-    const resumes = JSON.parse(localStorage.getItem(`resumes_${loggedInUser.email}`)) || [];
-    const resume = resumes[index];
-    const newWindow = window.open('', '_blank');
-    newWindow.document.write(resume.html);
-    newWindow.document.close();
-}
+        function viewResume(index) {
+            const resumes = JSON.parse(localStorage.getItem(`resumes_${loggedInUser.email}`)) || [];
+            const resume = resumes[index];
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(resume.html);
+            newWindow.document.close();
+        }
+
+
+
+
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+
+        menuToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("show");
+        });
+
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            window.location.href = "login.html";
+        }
 
     </script>
 </body>
+
 </html>
